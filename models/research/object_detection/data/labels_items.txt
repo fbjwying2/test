@@ -18,3 +18,7 @@ item {
     id: 5
     name: 'drawer chest'
 }
+item { 
+    id: 6
+    name: 'cup'
+}
