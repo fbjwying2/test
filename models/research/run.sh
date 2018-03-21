@@ -20,10 +20,10 @@ eval_dir=$output_dir/eval
 config=ssd_mobilenet_v1_pets.config
 pipeline_config_path=$output_dir/$config
 
-label_map_txt = labels_items.txt
+label_map_txt=labels_items.txt
 label_map_txt_path=$output_dir/$label_map_txt
 
-test_jpg = test.jpg
+test_jpg=test.jpg
 test_jpg_path=$output_dir/$test_jpg
 
 # 先清空输出目录，本地运行会有效果，tinymind上运行这一行没有任何效果
