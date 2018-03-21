@@ -36,7 +36,7 @@ cp $DIR/object_detection/samples/configs/$config $pipeline_config_path
 cp $DIR/object_detection/data/$label_map_txt $label_map_txt_path
 cp $DIR/object_detection/data/$test_jpg $test_jpg_path
 
-for i in {0..0}  # for循环中的代码执行5此，这里的左右边界都包含，也就是一共训练500个step，每100step验证一次
+for i in {0..30}  # for循环中的代码执行5此，这里的左右边界都包含，也就是一共训练500个step，每100step验证一次
 do
     echo "############" $i "runnning #################"
     last=$[$i*100]
