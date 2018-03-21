@@ -20,12 +20,21 @@ eval_dir=$output_dir/eval
 config=ssd_mobilenet_v1_pets.config
 pipeline_config_path=$output_dir/$config
 
+label_map_txt = labels_items.txt
+label_map_txt_path=$output_dir/$label_map_txt
+
+test_jpg = test.jpg
+test_jpg_path=$output_dir/$test_jpg
+
 # 先清空输出目录，本地运行会有效果，tinymind上运行这一行没有任何效果
 # tinymind已经支持引用上一次的运行结果，这一行需要删掉，不然会出现上一次的运行结果被清空的状况。
 # rm -rvf $output_dir/*
 
 # 因为dataset里面的东西是不允许修改的，所以这里要把config文件复制一份到输出目录
 cp $DIR/object_detection/samples/configs/$config $pipeline_config_path
+
+cp $DIR/object_detection/data/$label_map_txt $label_map_txt_path
+cp $DIR/object_detection/data/$test_jpg $test_jpg_path
 
 for i in {0..0}  # for循环中的代码执行5此，这里的左右边界都包含，也就是一共训练500个step，每100step验证一次
 do
@@ -45,5 +54,4 @@ done
 python ./object_detection/export_inference_graph.py --input_type image_tensor --pipeline_config_path $pipeline_config_path --trained_checkpoint_prefix $train_dir/model.ckpt-$current  --output_directory $output_dir/exported_graphs
 
 # 在test.jpg上验证导出的模型
-infe_dataset_dir = $DIR/object_detection/data
-python ./object_detection/inference.py --output_dir=$output_dir --dataset_dir=$infe_dataset_dir
+python ./object_detection/inference.py --output_dir=$output_dir --dataset_dir=$output_dir
